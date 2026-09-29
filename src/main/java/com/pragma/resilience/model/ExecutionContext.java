@@ -5,8 +5,8 @@ import lombok.Data;
 
 @Data
 @Builder
-public class ExecutionContext {
-    private String correlationId;
-    private String serviceName;
-    private int maxAttempts;
-}
+public record ExecutionContext(
+    String correlationId,
+    String serviceName,
+    int maxAttempts
+) {}

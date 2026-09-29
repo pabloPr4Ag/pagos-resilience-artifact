@@ -28,9 +28,7 @@ public class ResilienceOrchestratorImpl<R> implements ResilienceOrchestrator<R> 
         CircuitBreaker circuitBreaker = circuitBreakerRegistry.circuitBreaker(context.getServiceName());
         Retry retry = retryRegistry.retry(context.getServiceName());
 
-        Supplier<R> decoratedSupplier = CircuitBreaker.decorateSupplier(circuitBreaker, 
-                                         Retry.decorateSupplier(retry, action));
-
-        return decoratedSupplier.get();
+        return CircuitBreaker.decorateSupplier(circuitBreaker, 
+                                  Retry.decorateSupplier(retry, action)).get();
     }
 }
